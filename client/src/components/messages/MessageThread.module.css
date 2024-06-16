@@ -1,0 +1,73 @@
+.threadBox{
+    flex:1;
+    display: flex;
+    flex-direction: column;
+    .header{
+        height: 60px;
+        padding-left: 36px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        border-bottom: 1px solid #e0e0e0;
+        .name{
+            margin-left: 12px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+    }
+    .thread{
+        flex:1;
+        .sendMsgBox{
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            margin-top: 10px;
+            .sendMsg{
+                padding:14px 17px;
+                border-radius:22px ;
+                background-color: #efefef;
+            }
+        }
+        .receiveMsgBox{
+            display: flex;
+            flex-direction: row;
+            align-items: flex-end;
+            margin-top: 10px;
+            .receiveMsg{
+                padding:14px 17px;
+                border-radius:22px ;
+                background-color: #fff;
+                border: 1px solid #efefef;
+                margin-left: 8px;
+            }
+        }
+    }
+  
+  
+    .inputBox{
+        padding:20px;
+        height: 40px;
+        display: flex;
+        position: relative;
+        .input{
+            width: 100%;
+            height: 100%;
+            outline: none;
+            font-size: 16px;
+            border-radius: 22px;
+            border:1px solid #dbdbdb;
+            padding: 10px;
+            box-sizing: border-box;
+            resize: none;
+            padding-right:30px;
+        }
+        .send{
+            width: 24px;
+            height: 24px;
+            position: absolute;
+            top:30px;
+            right:20px;
+        }
+    }
+   
+}

@@ -1,0 +1,173 @@
+.box{
+    flex:1;
+    display: flex;
+    .groupTabs{
+        width: 340px;
+        background-color: #1D1C21;
+    }
+    .searchBar{
+        height: 64px;
+        background-image: url("./searchBar.png");
+        background-size: cover;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .tab{
+        height: 75px;
+        padding:15px 20px 15px 20px;
+        box-sizing: border-box;
+        display: flex;
+        .thumb{
+            width: 40px;
+            height: 40px;
+        }
+        .tabRight{
+            flex:1;
+            margin-left: 10px;
+            flex-direction: column;
+            justify-content: space-around;
+            display: flex;
+            .tabTitle{
+                display: flex;
+                justify-content: space-between;
+                .title{
+                    color:#C9C7D0; 
+                 }
+                 .time{
+                    font-size: 12px;
+                    color:#7B798F
+                 }
+            }
+            .subLine{
+                color:#7B798F;
+                font-size:14px;
+            }
+        }
+    }
+    .selectedTab{
+        background-color: #26252D;
+    }
+    .chatBox{
+        flex:1;
+        color:#FFF;
+        background-color: #26252D;
+        display: flex;
+        flex-direction: column;
+        .chatHead{
+            height: 64px;
+            display: flex;
+            justify-content: space-between;
+            padding-left: 20px;
+            padding-right: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            align-items: center;
+        }
+        .chatNum{
+            width: 104px;
+            height: 44px;
+            border-radius: 50px;
+            border: 1px solid #7B798F;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0px 30px;
+            box-sizing: border-box;
+            .realNum{
+                font-size: 14px;
+            }
+        }
+    }
+    .chatDisplay{
+        flex:1;
+        padding: 20px;
+    }
+    .msgSender{
+        display: flex;
+        flex-direction: row;
+        color:rgba(201, 199, 208, 1);
+        font-size: 12px;
+        margin-top: 5px;
+        .msgBox{
+            margin-left: auto;
+            max-width: 500px;
+            margin-right: 10px;
+            .info{
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                .time{
+                    color:#7B798F;
+                    font-size: 12px;
+                    margin-left: 10px;
+                }
+            }
+            .msg{
+                margin-top: 5px;
+                padding: 15px;
+                border-radius: 8px;
+                background: rgb(150 242 193);
+                font-size: 15px;
+                line-height: 24px;
+                color: rgba(12, 14, 19, 1);
+            }
+        }
+    }
+    .msgReceiver{
+        display: flex;
+        flex-direction: row;
+        margin-top: 20px;
+        color:rgba(201, 199, 208, 1);
+        font-size: 12px;
+        .msgBox{
+            margin-right: auto;
+            max-width: 500px;
+            margin-left: 10px;
+            .info{
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                .time{
+                    color:#7B798F;
+                    font-size: 12px;
+                    margin-left: 10px;
+                }
+            }
+            .msg{
+                margin-top: 5px;
+                padding: 15px;
+                border-radius: 8px;
+                background: rgba(69, 68, 81, 1);
+                font-size: 15px;
+                line-height: 24px;
+                color: #fff;
+            }
+        }
+    }
+    .chatInputBox{
+        height: 100px;
+        .chatInput{
+            resize: none;
+            height: 100%;
+            width: 100%;
+            padding: 0px;
+            margin: 0px;
+            overflow: hidden;
+            border: none;
+            background: #26252D;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-left: 20px;
+            color: #fff;
+            padding-top: 5px;
+            box-sizing: border-box;
+            outline: none;
+        }
+    }
+    
+}
+.welcome{
+    color:#FFF;
+    font-size:20px;
+    align-items: center;
+    justify-content: center;
+    flex:1;
+    display: flex;
+}
