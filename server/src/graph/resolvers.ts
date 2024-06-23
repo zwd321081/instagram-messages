@@ -40,16 +40,16 @@ const resolvers = {
         }
     },
     Mutation: {
-        addMessage: async (parent, args, context, info) => {
+        addThread: async (parent, args, context, info) => {
             // pubsub.publish('POST_CREATED', { postCreated: args });
-            const { content, sendUser, receiveUser, channel } = args;
+            const { content, sendUser, receiveUser, group } = args;
 
             // new thread
             const thread = new Thread({
                 content,
                 sendUser,
                 receiveUser,
-                channel
+                group
             });
             // 将实例保存到数据库
             const result = await thread.save();

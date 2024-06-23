@@ -1,6 +1,6 @@
 
 import Avatar from "../Avatar";
-import styles from "./MessageList.module.css";
+import styles from "./Groups.module.css";
 const Header = () => {
   return (
     <div className={styles.headerBox}>
@@ -9,7 +9,7 @@ const Header = () => {
   )
 }
 
-const Message = ()=>{
+const Group = ()=>{
   return (
     <div className={styles.msgBox}>
       <Avatar src="https://i.postimg.cc/440sCPPH/Avatar1.png" />
@@ -26,9 +26,9 @@ const List = ()=>{
 
   return (
     <div className={styles.listBox}>
-      <Message/>
-      <Message/>
-      <Message/>
+      <Group/>
+      <Group/>
+      <Group/>
     </div>
   )
 

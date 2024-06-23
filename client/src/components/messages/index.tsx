@@ -1,10 +1,10 @@
 
-import MessageList from './GroupList'
+import Groups from './Groups'
 import MessageThread from './MessageThread'
 function Messages(){
     return (
         <>
-         <MessageList/>
+         <Groups/>
          <MessageThread/>
         </>
     )
