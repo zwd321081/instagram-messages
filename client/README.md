@@ -28,3 +28,8 @@ export default {
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+
+## design
+
+[figma](https://www.figma.com/design/AVkjKyXt9UpJPdxJt6EoV5/10-Real-Chat%2FMessaging-Pages---Facebook%2C-Reddit%2C-Snapchat-%26-more-(Community)?node-id=0-1&t=mvmUkZpcXYm4XMYx-0)

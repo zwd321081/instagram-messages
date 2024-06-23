@@ -33,7 +33,7 @@ const List = ()=>{
   )
 
 }
-function MessageList() {
+function GroupList() {
   return (
     <section className={styles.msglistBox}>
       <Header />
@@ -42,4 +42,4 @@ function MessageList() {
   );
 }
 
-export default MessageList;
+export default GroupList;

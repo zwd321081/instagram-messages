@@ -1,10 +1,7 @@
-import Channel from "@model/Channel";
-import Msg from "@model/Msg";
+import Group from "@model/Group";
+import Thread from "@model/Thread";
 import User from "@model/User";
-import { subscribe } from "diagnostics_channel";
-import { create } from "domain";
 import { PubSub } from "graphql-subscriptions";
-import { ObjectId } from "mongodb";
 
 const pubsub = new PubSub();
 const resolvers = {
@@ -14,40 +11,26 @@ const resolvers = {
             const user = await User.findOne({ tid });
             return user;
         },
-        users: async () => {
-            const userList = await User.find();
-            return userList;
-        },
-        channel: async (parent, args, context, info) => {
+        group: async (parent, args, context, info) => {
             const { id } = args;
-            const channel = await Channel.findById(id).populate('users').populate({
-                path: 'msgs',             // msgs 是 Channel 模型中的字段 
-                populate: {
-                  path: 'sendUser'        // sendUser 是 Message 模型中的字段
-                }
-              }).exec();
-            if(channel.msgs&&channel.msgs.length){
-                let _msgs:any = channel.msgs;
-                _msgs.forEach(item=>{
-                    item.sendUser = item.sendUser.toString();
-                    item.channel = item.channel.toString();
-                })
-            }
-            return channel;
+            const group = (await Group.findById(id)).populate('users')
+            return group;
         },
-        channels: async () => {
-            const channelList = await Channel.find().populate('users');
-            return channelList;
+        groups: async () => {
+            const groups = await Group.find();
+            return groups;
+        }
+    },
+    Group:{
+        async threads(parent){
+            return await Thread.find({group:parent.id})
         }
     },
     Subscription: {
-        postCreated: {
-            subscribe: () => pubsub.asyncIterator(['POST_CREATED']),
-        },
         msgCreated:{
             subscribe:()=>pubsub.asyncIterator(['MSG_CREATED']),
             resolve:async (payload)=>{
-                const channelData =await Channel.findById(payload.msgCreated.channel)
+                const channelData =await Group.findById(payload.msgCreated.channel)
                 let msgCreatedCopy = { ...payload.msgCreated.toJSON() }; // toJSON() or toObject()
                 msgCreatedCopy.channel = channelData;
                 msgCreatedCopy.id=msgCreatedCopy._id;
@@ -57,29 +40,25 @@ const resolvers = {
         }
     },
     Mutation: {
-        createPost: async (parent, args, context, info) => {
-            pubsub.publish('POST_CREATED', { postCreated: args });
-            console.log(args);
-        },
         addMessage: async (parent, args, context, info) => {
             // pubsub.publish('POST_CREATED', { postCreated: args });
             const { content, sendUser, receiveUser, channel } = args;
 
-            // 创建一个新的Message实例
-            const msg = new Msg({
+            // new thread
+            const thread = new Thread({
                 content,
                 sendUser,
                 receiveUser,
                 channel
             });
             // 将实例保存到数据库
-            const result = await msg.save();
-            const relevantChannel = await Channel.findById(channel);
-            if (relevantChannel) {
-                relevantChannel.msgs.push(msg.id);
-                await relevantChannel.save();
-            }
-            pubsub.publish("MSG_CREATED",{msgCreated:msg});
+            const result = await thread.save();
+            // const relevantChannel = await Group.findById(channel);
+            // if (relevantChannel) {
+            //     relevantChannel.msgs.push(thread.id);
+            //     await relevantChannel.save();
+            // }
+            // pubsub.publish("MSG_CREATED",{msgCreated:msg});
             return result;
         }
     }

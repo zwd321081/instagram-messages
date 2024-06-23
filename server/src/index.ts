@@ -9,7 +9,7 @@ import http from 'http';
 import cors from 'cors';
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import { createTestChannels, createTestDatas, createTestUsers } from '@utils/index';
+import { initTestDatas } from '@utils/index';
 import typeDefs from '@graph/typedefs';
 import resolvers from '@graph/resolvers';
 
@@ -34,7 +34,7 @@ async function connectToMongo() {
 
 connectToMongo().catch(err => console.error(err));
 
-createTestDatas();
+initTestDatas();
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 

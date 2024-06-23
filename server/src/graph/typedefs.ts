@@ -2,13 +2,13 @@
 
 const typeDefs = `#graphql
   scalar ISODate
-  type Message{
+  type Thread{
     id: ID!
     content: String!
     sendUser: User!
     receiveUser: User
     createdAt: ISODate
-    channel: Channel!
+    group: Group!
   }
 
   type User{
@@ -16,46 +16,36 @@ const typeDefs = `#graphql
     id: ID!
     name: String!
     avatar: String,
-    telphone:String
   }
-  type Channel{
+  type Group{
     id: ID!
     thumb: String
     name: String!
     users: [User!],
-    msgs: [Message!],
+    threads: [Thread!],
     createdAt: ISODate
-  }
-
-  type Query {
-    users: [User],
-    channel(id: ID!): Channel
-    user(tid: ID!): User
-    channels: [Channel]
+    updatedAt: ISODate
   }
 
 
-  input MessageInput{
-    content: String!
-    sendUser: ID!
-    receiveUser: ID
-    channel: ID!
-  }
+
+
+ 
   type Subscription {
-    postCreated: Post
-    msgCreated:Message
+    msgCreated:Thread
   }
 
-  type Post{
-    author: String
-    comment: String
-  }
   type Mutation{
-    createPost(author: String, comment: String): Post
     addMessage(content: String!
     sendUser: ID!
     receiveUser: ID
-    channel: ID!): Message
+    channel: ID!): Thread
+  }
+
+  type Query {
+    group(id: ID!): Group
+    user(tid: ID!): User
+    groups: [Group]
   }
 `;
 

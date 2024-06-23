@@ -1,13 +1,13 @@
 import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
-const channelSchema = new Schema({
+const groupSchema = new Schema({
     name: { type: String, required: true },
     thumb: { type: String },
     users: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-    msgs: [{ type: Schema.Types.ObjectId, ref: 'Msg' }]
+    threads: [{ type: Schema.Types.ObjectId, ref: 'Thread' }]
 },{ timestamps: true });
 
-const Channel = mongoose.model('Channnel', channelSchema);
+const Group = mongoose.model('Group', groupSchema);
 
-export default Channel;
+export default Group;

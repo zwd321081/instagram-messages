@@ -1,14 +1,14 @@
-import Channel from "@model/Channel";
-import Msg from "@model/Msg";
+import Group from "@model/Group";
+import Thread from "@model/Thread";
 import User from "@model/User";
 
 
-export async function createTestUsers() {
+export async function initTestUsers() {
     await User.collection.drop()
     let userList = [
-        { tid:1, name: 'Cavill Lane', avatar: 'https://p5.music.126.net/obj/wonDlsKUwrLClGjCm8Kx/36505491862/791a/762e/c6f4/c8c292219e5bbb748c2981f505f61924.png' },
-        { tid:2, name: 'Albert Flores', avatar: 'https://p5.music.126.net/obj/wonDlsKUwrLClGjCm8Kx/36505510883/d37b/5f6e/451a/4b08b5bfb26021dc3679296713cf7355.png' },
-        { tid:3, name: 'Darlene Robertson', avatar: 'https://p6.music.126.net/obj/wonDlsKUwrLClGjCm8Kx/36505533027/83da/1615/35de/82f31c167d586bc3b3d72d7d49169222.png' },
+        { tid:1, name: 'Chris Griffin', avatar: 'https://i.postimg.cc/vB88ZM3Z/griffn.png' }, //that's me
+        { tid:2, name: 'Philip J. Fry', avatar: 'https://i.postimg.cc/440sCPPH/Avatar1.png' },
+        { tid:3, name: 'Cleveland Brown', avatar: 'https://i.postimg.cc/Y0hpQRcc/brown.png' }, 
     ];
 
     userList.forEach(async item => {
@@ -23,77 +23,67 @@ export async function createTestUsers() {
     });
 }
 
-export async function createTestChannels() {
-   await Channel.collection.drop();
-    let channelList = [{
-        name:"Happy Three family",
-        thumb:"https://p6.music.126.net/obj/wonDlsKUwrLClGjCm8Kx/36552442273/d15d/426a/2950/5739172380a52fc7d48863971feaf1a9.png"
+export async function initTestGroups() {
+   await Group.collection.drop();
+    let groups = [{
+        name:"The boys",
+        thumb:"https://i.postimg.cc/T3rTjhsP/theboys.png"
     },{
-        name:"chat with one people",
-        thumb:"https://p6.music.126.net/obj/wonDlsKUwrLClGjCm8Kx/36552441610/dcca/c32c/a596/b48ce82c79c81436c7f8d93309e9f4c6.png"
+        name:"Philip J. Fry",
+        thumb:"https://i.postimg.cc/440sCPPH/Avatar1.png"
     }];
 
-    // Refactor with a for...of loop to handle async/await properly
-    for (let item of channelList) {
-        const channel = await Channel.findOne({ name: item.name });
-        if (!channel) {
-            const createdChannel = await Channel.create(item);
-            console.log(`Channel data ${createdChannel.name} created`);
+    for (let item of groups) {
+        const group = await Group.findOne({ name: item.name });
+        if (!group) {
+            const createdGroup = await Group.create(item);
+            console.log(` ${createdGroup.name} created`);
         } else {
-            console.log(`Channel data ${channel.name} already exists`);
+            console.log(`${group.name}  already exists`);
         }
     }
 
-    // Retrieve users and channels within the async context
     const users = await User.find();
-    const firstChannel = await Channel.findOne({ name: channelList[0].name });
-    const secondChannel = await Channel.findOne({ name: channelList[1].name });
+    const fristGroup = await Group.findOne({ name: groups[0].name });
 
-    // Add users to firstChannel if they don't already exist
-    if (firstChannel) {
+    //add three users into first group
+    if (fristGroup) {
         for (let user of users) {
-            if (firstChannel.users.indexOf(user.id) === -1) {
-                firstChannel.users.push(user.id);
+            if (fristGroup.users.indexOf(user.id) === -1) {
+                fristGroup.users.push(user.id);
             }
         }
-        await firstChannel.save();
-        await createTestMessages();
-        console.log('channelId',firstChannel.id)
+        await fristGroup.save();
     }
 
-    // Add the first user to secondChannel if they don't already exist
-    if (secondChannel) {
-        for(let i=0;i<2;i++){
+    const secondGroup = await Group.findOne({ name: groups[1].name });
+
+
+    if (secondGroup) {
+        for(let i=0;i<2;i++){ //add first two into second groups
             let user = users[i]
-            if(user&&secondChannel.users.indexOf(user.id) === -1){
-                secondChannel.users.push(user.id)
+            if(user&&secondGroup.users.indexOf(user.id) === -1){
+                secondGroup.users.push(user.id)
             }
         }
-        await secondChannel.save();
+        await secondGroup.save();
     }
+    
+ 
+
 }
 
-async function createTestMessages() {
-    Msg.collection.drop();
-    // const channels = await channel.find().populate('users');
-    await Msg.init(); // Initialize the Message model
-    // const msg = new Msg({
-    //     content:"hello",
-    //     sendUser,
-    //     channel:channel.id
-    // })
-    // await msg.save();
-    // channel.msgs.push(msg.id);
-    // await channel.save();
-    // console.log("Test data created successfully!")
+async function initTestMessages() {
+    Thread.collection.drop();
+    await Thread.init();
     
 
 }
 
-export async function createTestDatas(){
-    //clear all tables
+export async function initTestDatas(){
 
-    await createTestUsers();
-    await createTestChannels();
+    await initTestUsers();
+    await initTestGroups();
+    await initTestMessages();
   
 }

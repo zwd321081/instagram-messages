@@ -1,5 +1,5 @@
 
-import MessageList from './MessageList'
+import MessageList from './GroupList'
 import MessageThread from './MessageThread'
 function Messages(){
     return (
