@@ -4,6 +4,9 @@ import User from "@model/User";
 import { PubSub } from "graphql-subscriptions";
 
 const pubsub = new PubSub();
+async function getAndPopulateGroup(groupId) {
+  return await Group.findById(groupId).populate('users').exec();
+}
 const resolvers = {
     Query: {
         user: async (parent, args, context, info) => {
@@ -13,11 +16,15 @@ const resolvers = {
         },
         group: async (parent, args, context, info) => {
             const { id } = args;
-            const group = (await Group.findById(id)).populate('users')
-            return group;
+           return await getAndPopulateGroup(id);
         },
         groups: async () => {
-            const groups = await Group.find();
+            const groupIds = await Group.find({},"_id").exec();
+            const groups = [];
+            for(let id of groupIds){
+              const group = await getAndPopulateGroup(id);
+              groups.push(group)
+            }
             return groups;
         }
     },

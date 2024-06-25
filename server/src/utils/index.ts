@@ -8,7 +8,7 @@ export async function initTestUsers() {
     let userList = [
         { tid:1, name: 'Chris Griffin', avatar: 'https://i.postimg.cc/vB88ZM3Z/griffn.png' }, //that's me
         { tid:2, name: 'Philip J. Fry', avatar: 'https://i.postimg.cc/440sCPPH/Avatar1.png' },
-        { tid:3, name: 'Cleveland Brown', avatar: 'https://i.postimg.cc/Y0hpQRcc/brown.png' }, 
+        { tid:3, name: 'Cleveland Brown', avatar: 'https://i.postimg.cc/Y0hpQRcc/brown.png' },
     ];
 
     userList.forEach(async item => {
@@ -29,8 +29,8 @@ export async function initTestGroups() {
         name:"The boys",
         thumb:"https://i.postimg.cc/T3rTjhsP/theboys.png"
     },{
-        name:"Philip J. Fry",
-        thumb:"https://i.postimg.cc/440sCPPH/Avatar1.png"
+        name:"two people",
+        thumb:"https://p6.music.126.net/obj/wonDlsKUwrLClGjCm8Kx/36552442273/d15d/426a/2950/5739172380a52fc7d48863971feaf1a9.png"
     }];
 
     for (let item of groups) {
@@ -68,15 +68,15 @@ export async function initTestGroups() {
         }
         await secondGroup.save();
     }
-    
- 
+
+
 
 }
 
 async function initTestMessages() {
     Thread.collection.drop();
     await Thread.init();
-    
+
 
 }
 
@@ -85,5 +85,5 @@ export async function initTestDatas(){
     await initTestUsers();
     await initTestGroups();
     await initTestMessages();
-  
+
 }
