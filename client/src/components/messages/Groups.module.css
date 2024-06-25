@@ -10,6 +10,12 @@
         font-size: 16px;
         font-weight: bold;
         border-bottom: 1px solid #e0e0e0;
+        .content{
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            .name{margin-left: 5px;}
+        }
     }
     .listBox{
         margin-top: 8px;

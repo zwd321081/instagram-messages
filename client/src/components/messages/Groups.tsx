@@ -1,10 +1,14 @@
 
+import { useContext } from "react";
 import Avatar from "../Avatar";
 import styles from "./Groups.module.css";
+import UserContext from "../../hooks/userContext";
 const Header = () => {
+  const user = useContext(UserContext);
+  console.log(user)
   return (
     <div className={styles.headerBox}>
-      <h1>thegrifll</h1>
+      <h1 className={styles.content}><Avatar src={user?.avatar} width={25} height={25}/><span className={styles.name}>{user?.name}</span></h1>
     </div>
   )
 }

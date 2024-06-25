@@ -21,7 +21,7 @@ import { Messages } from './components/messages/index'
 function App() {
   const [searchParams] = useSearchParams();
   const {loading,error,data} = useQuery(GET_USER,{
-    variables:{tid:Number(searchParams.get('userId'))}
+    variables:{id:Number(searchParams.get('userId'))}
   });
 
   return (

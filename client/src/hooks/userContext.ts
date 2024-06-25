@@ -1,10 +1,10 @@
-import React, { createContext } from 'react';
+import { createContext } from 'react';
 
 type User = {
     name: string;
     avatar: string;
-    telphone: string;
     id:string;
+    tid:string
 };
 
 // Create the context with the User type

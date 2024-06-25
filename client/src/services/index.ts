@@ -2,12 +2,12 @@ import { useQuery, gql } from '@apollo/client';
 
 
 const GET_USER = gql`
- query getUserQuery($tid:ID!){
-  user(tid:$tid){
+ query userQuery($id:ID!){
+  user(tid:$id){
+    id,
     name,
     avatar,
-    id,
-    tid,
+    tid
   }
 }
 `;
