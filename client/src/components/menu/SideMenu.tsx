@@ -18,7 +18,7 @@ interface CardProps {
 const Card:React.FC<CardProps> = ({ card: { imageUrl, title }})=>{
     return (
         <section className={styles.card}>
-            <img className={styles.cardThumb} src={imageUrl}/>
+            <img className={styles.cardavatar} src={imageUrl}/>
             <div className={styles.cardContent}>{title}</div>
         </section>
     

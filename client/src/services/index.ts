@@ -12,20 +12,22 @@ const GET_USER = gql`
 }
 `;
 
-const GET_CHANNELS = gql`
-    query getAllChannels{
-        channels {
+const GET_ALL_GROUPS = gql`
+   query getAllGroups{
+        groups {
             id,
             name,
-            thumb,
-            createdAt,
-            users{
+            avatar,
+            users {
                 id,
                 name,
                 avatar
             }
-        }
-    }
+            threads {
+                content
+            }
+     }
+}
 `
 
 const GET_SINGLE_CHANNEL = gql`
@@ -33,7 +35,7 @@ const GET_SINGLE_CHANNEL = gql`
     channel(id: $id) {
         id,
         name,
-        thumb,
+        avatar,
         users{
             id,
             name,
@@ -78,7 +80,7 @@ const POST_FEED_SUBSCRIPTION = gql`
     }
 `
 
-const POST_MSG_SUBSCRIPTION=gql`
+const POST_MSG_SUBSCRIPTION = gql`
     subscription MSGFeed{
         msgCreated{
             content,
@@ -89,6 +91,6 @@ const POST_MSG_SUBSCRIPTION=gql`
             }
         }
     }
-` 
+`
 
-export { GET_USER, GET_CHANNELS,GET_SINGLE_CHANNEL,CREATE_POST,POST_FEED_SUBSCRIPTION,ADD_MESSAGE,POST_MSG_SUBSCRIPTION};
+export { GET_USER, GET_ALL_GROUPS, GET_SINGLE_CHANNEL, CREATE_POST, POST_FEED_SUBSCRIPTION, ADD_MESSAGE, POST_MSG_SUBSCRIPTION };

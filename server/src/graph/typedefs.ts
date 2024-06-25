@@ -19,7 +19,7 @@ const typeDefs = `#graphql
   }
   type Group{
     id: ID!
-    thumb: String
+    avatar: String
     name: String!
     users: [User!],
     threads: [Thread!],

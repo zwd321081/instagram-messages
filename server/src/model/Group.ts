@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const groupSchema = new Schema({
     name: { type: String, required: true },
-    thumb: { type: String },
+    avatar: { type: String },
     users: [{ type: Schema.Types.ObjectId, ref: 'User' }],
     threads: [{ type: Schema.Types.ObjectId, ref: 'Thread' }]
 },{ timestamps: true });

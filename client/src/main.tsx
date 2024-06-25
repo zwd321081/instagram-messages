@@ -13,7 +13,6 @@ import { getMainDefinition } from '@apollo/client/utilities';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 
 import { createClient } from 'graphql-ws';
-import ChannelChatRoom from './components/channel/ChannelChatroom.tsx';
 // ES modules
 
 const httpLink = new HttpLink({
@@ -48,11 +47,6 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
     errorElement: <div>404 Not Found,please report </div>,
-    children: [{
-      path: "/channel/:channelId",
-      element: <ChannelChatRoom />,
-    
-    }]
   },
 ]);
 

@@ -27,7 +27,7 @@
     .card{
         display: flex;
         margin-bottom: 30px;;
-        .cardThumb{
+        .cardavatar{
             width: 40px;
             height: 40px;
             border-radius: 50%;
