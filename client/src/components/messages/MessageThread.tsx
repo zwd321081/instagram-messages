@@ -2,8 +2,8 @@ import { useContext, useRef } from "react"
 import Avatar from "../Avatar"
 import styles from "./MessageThread.module.css"
 import sendSvg from "./send.svg"
-import { useMutation } from "@apollo/client"
-import { ADD_THREAD_MUTATION } from "../../services"
+import { useMutation,useQuery } from "@apollo/client"
+import { ADD_THREAD_MUTATION, GET_GROUP_DETAIL } from "../../services"
 import userContext from "../../hooks/userContext"
 import { useParams } from "react-router-dom"
 
@@ -18,6 +18,14 @@ const Header = () => {
 }
 
 const Thread = () => {
+    const params = useParams();
+    if(!params.groupId ) return;
+
+    const singleGroupData = useQuery(GET_GROUP_DETAIL,{
+        variables: { id: params.groupId }
+    });
+    console.log(singleGroupData,'singleGroupData')
+
     return (
         <div className={styles.thread}>
             <div className={styles.sendMsgBox}>
