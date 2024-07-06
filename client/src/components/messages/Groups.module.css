@@ -24,6 +24,7 @@
             padding: 8px 20px;
             box-sizing: border-box;
             display: flex;
+            cursor: pointer;
             .msgContent{
                 flex:1;
                 margin-left: 12px;
@@ -50,6 +51,9 @@
                 }
 
             }
+        }
+        .selectedGroup{
+            background-color: rgba(255, 255, 2, 0.3);
         }
     }
 }

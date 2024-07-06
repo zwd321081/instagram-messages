@@ -5,7 +5,10 @@ export type GroupType = {
     users: UserType[],
     threads: [],
     createdAt: Number
-    updatedAt: Number
+    updatedAt: Number,
+    isSelected?: boolean;
+    index?: Number;
+    onClickCb?: (index: Number) => void;
 }
 
 export type UserType = {

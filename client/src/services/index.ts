@@ -55,18 +55,11 @@ const GET_SINGLE_CHANNEL = gql`
 
 `;
 
-const CREATE_POST = gql`
-    mutation createPost($author:String,$comment:String){
-        createPost(author: $author,comment:$comment) {
-            author,
-            comment
-        }
-    }
-`
 
-const ADD_MESSAGE = gql`
-    mutation ADDMSG($content:String!,$sendUser:ID!,$receiveUser:ID, $channel: ID!){
-        addMessage(content:$content,sendUser:$sendUser,receiveUser:$receiveUser,channel:$channel){
+
+const ADD_THREAD_MUTATION = gql`
+    mutation add_thread_mutation($content:String!,$sendUser:ID!,$receiveUser:ID, $group: ID!){
+        addThread(content:$content,sendUser:$sendUser,receiveUser:$receiveUser,group:$group){
             id
         }
     }
@@ -93,4 +86,4 @@ const POST_MSG_SUBSCRIPTION = gql`
     }
 `
 
-export { GET_USER, GET_ALL_GROUPS, GET_SINGLE_CHANNEL, CREATE_POST, POST_FEED_SUBSCRIPTION, ADD_MESSAGE, POST_MSG_SUBSCRIPTION };
+export { GET_USER, GET_ALL_GROUPS, GET_SINGLE_CHANNEL, POST_FEED_SUBSCRIPTION, POST_MSG_SUBSCRIPTION,ADD_THREAD_MUTATION };

@@ -13,6 +13,7 @@ import { getMainDefinition } from '@apollo/client/utilities';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 
 import { createClient } from 'graphql-ws';
+import MessageThread from './components/messages/MessageThread.tsx';
 // ES modules
 
 const httpLink = new HttpLink({
@@ -47,6 +48,11 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
     errorElement: <div>404 Not Found,please report </div>,
+    children: [{
+      path: "/group/:groupId",
+      element: <MessageThread />,
+    
+    }]
   },
 ]);
 

@@ -15,7 +15,7 @@ import resolvers from '@graph/resolvers';
 
 dotenv.config();
 
-const configMongoURL = process.env.ATALS_URI || "";
+const configMongoURL = process.env.FILESS_IO_URI || "";
 const configPort = Number(process.env.PORT) || 3000;
 
 interface MyContext {
