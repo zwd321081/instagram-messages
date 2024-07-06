@@ -6,7 +6,7 @@ import styles from "./Groups.module.css";
 import UserContext from "../../hooks/userContext";
 import { useQuery } from "@apollo/client";
 import { GET_ALL_GROUPS } from "../../services";
-import { GroupType, UserType } from "../../types";
+import { GroupType, UserType,ThreadType } from "../../types";
 import { useNavigate } from "react-router-dom";
 const Header = () => {
   const user = useContext(UserContext);
@@ -42,13 +42,13 @@ const Group = (props: GroupType) => {
     })
   }
   const threads = props.threads;
-  let lastThread = threads && threads.length ? threads[threads.length - 1] : ''
+  let lastThread:any = threads && threads.length ? threads[threads.length - 1]:null;
   return (
     <div className={isSelected ? classnames(styles.msgBox, styles.selectedGroup) : styles.msgBox} onClick={() => { onGroupClick() }}>
       <Avatar src={target.avatar} />
       <section className={styles.msgContent}>
         <div className={styles.name}>{target.name}</div>
-        <div className={styles.msg}><span className={styles.content}>{lastThread}</span><span className={styles.time}>20h</span></div>
+        <div className={styles.msg}><span className={styles.content}>{lastThread?.content}</span><span className={styles.time}>20h</span></div>
       </section>
     </div>
   )

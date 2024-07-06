@@ -12,9 +12,16 @@ export type GroupType = {
 }
 
 export type UserType = {
-    id: string
-    name: string
+    id: string,
+    name: string,
     avatar: String,
+}
+
+export type ThreadType = {
+    id:string,
+    content:string,
+    sendUser:string,
+    receiveUser:string,
 }
 
 

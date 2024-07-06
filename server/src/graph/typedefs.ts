@@ -36,11 +36,7 @@ const typeDefs = `#graphql
   }
 
   type Mutation{
-    addThread(
-    content: String!
-    sendUser: ID!
-    receiveUser: ID
-    channel: ID!): Thread
+    addThread(content: String! sendUser: ID! receiveUser: ID group: ID!): Thread
   }
 
   type Query {

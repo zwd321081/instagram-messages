@@ -43,18 +43,23 @@ const InputBox = () => {
     const [addThread] = useMutation(ADD_THREAD_MUTATION);
     const userInfo = useContext(userContext);
     const inputRef = useRef<HTMLTextAreaElement>(null);
-    const onSendThread = () => {
+    const onSendThread = async () => {
         if (userInfo) {
             let content = inputRef.current?.value;
             if (!content) return;
-            addThread({
+            const res = await addThread({
                 variables: {
                     content,
                     sendUser: userInfo.id,
-                    receiveUser:"",
                     group: params.groupId
                 }
             })
+            if (res) {
+                console.log(res)
+              
+            }
+            if (inputRef && inputRef.current && inputRef.current)
+                inputRef.current.value = "";
 
         }
     }
@@ -69,7 +74,7 @@ const InputBox = () => {
 function MessageThread() {
     const params = useParams();
 
-    if(!params.groupId) return <div className={styles.welcome}>Welcome</div>
+    if (!params.groupId) return <div className={styles.welcome}>Welcome</div>
 
     return (
         <div className={styles.threadBox}>
