@@ -88,25 +88,29 @@ const InputBox = () => {
         if (userInfo) {
             let content = inputRef.current?.value;
             if (!content) return;
-            const res = await addThread({
+             await addThread({
                 variables: {
                     content,
                     sendUser: userInfo.id,
                     group: params.groupId
                 }
             })
-            if (res) {
-                console.log(res)
-
-            }
             if (inputRef && inputRef.current && inputRef.current)
                 inputRef.current.value = "";
 
         }
     }
+
+    const onEnterPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+        if (e.keyCode == 13 && e.shiftKey == false) {
+            e.preventDefault();
+            onSendThread();
+
+        }
+    }
     return (
         <div className={styles.inputBox}>
-            <textarea placeholder="Type a message" className={styles.input} ref={inputRef} />
+            <textarea placeholder="Type a message" className={styles.input} ref={inputRef}  onKeyDown={onEnterPress}/>
             <img src={sendSvg} alt="send" className={styles.send} onClick={() => { onSendThread() }} />
         </div>
     )
