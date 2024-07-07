@@ -24,7 +24,8 @@ const GET_ALL_GROUPS = gql`
                 avatar
             }
             threads {
-                content
+                content,
+                createdAt
             }
      }
 }

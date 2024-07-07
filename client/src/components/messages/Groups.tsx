@@ -8,6 +8,7 @@ import { useQuery } from "@apollo/client";
 import { GET_ALL_GROUPS } from "../../services";
 import { GroupType, UserType,ThreadType } from "../../types";
 import { useNavigate } from "react-router-dom";
+import { getTimeTip } from "../../utils";
 const Header = () => {
   const user = useContext(UserContext);
   return (
@@ -48,7 +49,7 @@ const Group = (props: GroupType) => {
       <Avatar src={target.avatar} />
       <section className={styles.msgContent}>
         <div className={styles.name}>{target.name}</div>
-        <div className={styles.msg}><span className={styles.content}>{lastThread?.content}</span><span className={styles.time}>20h</span></div>
+        <div className={styles.msg}><span className={styles.content}>{lastThread?.content}</span><span className={styles.time}>{getTimeTip(lastThread?.createdAt)}</span></div>
       </section>
     </div>
   )
