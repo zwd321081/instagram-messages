@@ -2,8 +2,8 @@ import { useContext, useRef } from "react"
 import Avatar from "../Avatar"
 import styles from "./MessageThread.module.css"
 import sendSvg from "./send.svg"
-import { useMutation, useQuery } from "@apollo/client"
-import { ADD_THREAD_MUTATION, GET_GROUP_DETAIL } from "../../services"
+import { useMutation, useQuery, useSubscription } from "@apollo/client"
+import { ADD_THREAD_MUTATION, ADD_THREAD_SUBSCRIPTION, GET_GROUP_DETAIL } from "../../services"
 import userContext from "../../hooks/userContext"
 import { useParams } from "react-router-dom"
 
@@ -20,7 +20,9 @@ const Header = () => {
 const Thread = () => {
     const params = useParams();
     const userInfo = useContext(userContext);
-
+    const add_thread_sub = useSubscription(ADD_THREAD_SUBSCRIPTION);
+    console.log("add_thread_sub",add_thread_sub)
+    
     if (!params.groupId) return;
 
     const res = useQuery(GET_GROUP_DETAIL, {
@@ -28,9 +30,15 @@ const Thread = () => {
     });
     console.log(res, 'singleGroupData')
 
+    if(add_thread_sub && add_thread_sub.data && add_thread_sub.data.threadCreated){
+        if(add_thread_sub.data.threadCreated == params.groupId){
+            res.refetch();
+        }
+    }
+
     if (!(res && res.data)) return null;
     const { group } = res.data;
-    const { threads } = group;
+    const { threads } = group||[];
 
     return (
         <div className={styles.thread}>

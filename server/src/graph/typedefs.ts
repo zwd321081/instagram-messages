@@ -32,7 +32,7 @@ const typeDefs = `#graphql
 
  
   type Subscription {
-    msgCreated:Thread
+    threadCreated:String
   }
 
   type Mutation{

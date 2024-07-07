@@ -3,6 +3,7 @@ import Thread from "@model/Thread";
 import User from "@model/User";
 
 
+export const THREAD_CREATED_CONST = "THREAD_CREATED"
 export async function initTestUsers() {
     await User.collection.drop()
     let userList = [

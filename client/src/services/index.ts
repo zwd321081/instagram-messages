@@ -63,26 +63,12 @@ const ADD_THREAD_MUTATION = gql`
         }
     }
 `
-const POST_FEED_SUBSCRIPTION = gql`
-    subscription PostFeed {
-        postCreated {
-            author
-            comment
-        }
+const ADD_THREAD_SUBSCRIPTION = gql`
+    subscription add_thread_sub {
+        threadCreated
     }
 `
 
-const POST_MSG_SUBSCRIPTION = gql`
-    subscription MSGFeed{
-        msgCreated{
-            content,
-            id,
-            createdAt,
-            channel{
-                id
-            }
-        }
-    }
-`
 
-export { GET_USER, GET_ALL_GROUPS, GET_GROUP_DETAIL, POST_FEED_SUBSCRIPTION, POST_MSG_SUBSCRIPTION, ADD_THREAD_MUTATION };
+
+export { GET_USER, GET_ALL_GROUPS, GET_GROUP_DETAIL, ADD_THREAD_SUBSCRIPTION, ADD_THREAD_MUTATION };

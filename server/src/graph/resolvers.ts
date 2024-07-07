@@ -1,6 +1,7 @@
 import Group from "@model/Group";
 import Thread from "@model/Thread";
 import User from "@model/User";
+import { THREAD_CREATED_CONST } from "@utils/index";
 import { PubSub } from "graphql-subscriptions";
 
 const pubsub = new PubSub();
@@ -34,16 +35,8 @@ const resolvers = {
         }
     },
     Subscription: {
-        msgCreated:{
-            subscribe:()=>pubsub.asyncIterator(['MSG_CREATED']),
-            resolve:async (payload)=>{
-                const channelData =await Group.findById(payload.msgCreated.channel)
-                let msgCreatedCopy = { ...payload.msgCreated.toJSON() }; // toJSON() or toObject()
-                msgCreatedCopy.channel = channelData;
-                msgCreatedCopy.id=msgCreatedCopy._id;
-
-                return msgCreatedCopy;
-            }
+        threadCreated:{
+            subscribe:()=>pubsub.asyncIterator([THREAD_CREATED_CONST]),
         }
     },
     Mutation: {
@@ -65,7 +58,7 @@ const resolvers = {
             //     relevantChannel.msgs.push(thread.id);
             //     await relevantChannel.save();
             // }
-            // pubsub.publish("MSG_CREATED",{msgCreated:msg});
+            pubsub.publish(THREAD_CREATED_CONST,{threadCreated:group});
             return result;
         }
     }
