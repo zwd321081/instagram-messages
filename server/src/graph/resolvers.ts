@@ -41,7 +41,6 @@ const resolvers = {
     },
     Mutation: {
         addThread: async (parent, args, context, info) => {
-            // pubsub.publish('POST_CREATED', { postCreated: args });
             const { content, sendUser, receiveUser, group } = args;
 
             // new thread
@@ -51,13 +50,7 @@ const resolvers = {
                 receiveUser,
                 group
             });
-            // 将实例保存到数据库
             const result = await thread.save();
-            // const relevantChannel = await Group.findById(channel);
-            // if (relevantChannel) {
-            //     relevantChannel.msgs.push(thread.id);
-            //     await relevantChannel.save();
-            // }
             pubsub.publish(THREAD_CREATED_CONST,{threadCreated:group});
             return result;
         }

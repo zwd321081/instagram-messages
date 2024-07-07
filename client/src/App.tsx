@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react'
-import { Content } from './components/content/Content'
 import { useParams, useSearchParams } from 'react-router-dom';
 import { useQuery, gql, useSubscription } from '@apollo/client';
 import UserContext from './hooks/userContext';
-import { GET_USER, POST_FEED_SUBSCRIPTION } from './services';
+import { GET_USER } from './services';
 
 
 import { Navigation } from './components/nav/Navigation'
@@ -29,7 +28,6 @@ function App() {
     <UserContext.Provider value={data?.user}>
       <Navigation/>
       <Messages/>
-      {/* <Messages/> */}
     </UserContext.Provider>
     </>
   )
