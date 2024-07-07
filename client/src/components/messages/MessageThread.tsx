@@ -2,7 +2,7 @@ import { useContext, useRef } from "react"
 import Avatar from "../Avatar"
 import styles from "./MessageThread.module.css"
 import sendSvg from "./send.svg"
-import { useMutation,useQuery } from "@apollo/client"
+import { useMutation, useQuery } from "@apollo/client"
 import { ADD_THREAD_MUTATION, GET_GROUP_DETAIL } from "../../services"
 import userContext from "../../hooks/userContext"
 import { useParams } from "react-router-dom"
@@ -19,16 +19,41 @@ const Header = () => {
 
 const Thread = () => {
     const params = useParams();
-    if(!params.groupId ) return;
+    const userInfo = useContext(userContext);
 
-    const singleGroupData = useQuery(GET_GROUP_DETAIL,{
+    if (!params.groupId) return;
+
+    const res = useQuery(GET_GROUP_DETAIL, {
         variables: { id: params.groupId }
     });
-    console.log(singleGroupData,'singleGroupData')
+    console.log(res, 'singleGroupData')
+
+    if (!(res && res.data)) return null;
+    const { group } = res.data;
+    const { threads } = group;
 
     return (
         <div className={styles.thread}>
-            <div className={styles.sendMsgBox}>
+            {threads.map((item: any) => {
+                const isSender = userInfo && userInfo.id == item.sendUser.id;
+                if (isSender) {
+                    return (
+                        <div className={styles.sendMsgBox}>
+                            <section className={styles.sendMsg}>{item.content}</section>
+                        </div>
+                    )
+                } else {
+                    return (
+                        <div className={styles.receiveMsgBox}>
+                            <Avatar src={item.sendUser.avatar} width={24} height={24} />
+                            <div className={styles.receiveMsg}>{item.content}</div>
+                        </div>
+                    )
+                }
+
+
+            })}
+            {/* <div className={styles.sendMsgBox}>
                 <section className={styles.sendMsg}>We’re at the Drunken Clam!</section>
             </div>
             <div className={styles.receiveMsgBox}>
@@ -41,7 +66,7 @@ const Thread = () => {
             <div className={styles.receiveMsgBox}>
                 <Avatar src="https://i.postimg.cc/440sCPPH/Avatar1.png" width={24} height={24} />
                 <div className={styles.receiveMsg}>OH GOD WHAT IS THIS PLACE. Aliens, robots oh no Peter I need your help!</div>
-            </div>
+            </div> */}
         </div>
     )
 }
@@ -64,7 +89,7 @@ const InputBox = () => {
             })
             if (res) {
                 console.log(res)
-              
+
             }
             if (inputRef && inputRef.current && inputRef.current)
                 inputRef.current.value = "";

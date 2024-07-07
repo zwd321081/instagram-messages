@@ -30,7 +30,7 @@ const resolvers = {
     },
     Group:{
         async threads(parent){
-            return await Thread.find({group:parent.id})
+            return await Thread.find({group:parent.id}).populate('sendUser').populate('receiveUser').exec()
         }
     },
     Subscription: {

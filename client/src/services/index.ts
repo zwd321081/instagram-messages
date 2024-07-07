@@ -45,6 +45,7 @@ const GET_GROUP_DETAIL = gql`
                 content,
                 createdAt,
             sendUser{
+                avatar,
                 id
               }
             }
