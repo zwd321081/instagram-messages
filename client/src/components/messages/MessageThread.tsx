@@ -10,8 +10,7 @@ import { useParams } from "react-router-dom"
 const Header = () => {
     return (
         <div className={styles.header}>
-            <Avatar src="https://i.postimg.cc/440sCPPH/Avatar1.png" width={24} height={24} />
-            <span className={styles.name}>Philip J. Fry</span>
+            {/* This is instgram parody app */}
         </div>
     )
 
@@ -21,14 +20,12 @@ const Thread = () => {
     const params = useParams();
     const userInfo = useContext(userContext);
     const add_thread_sub = useSubscription(ADD_THREAD_SUBSCRIPTION);
-    console.log("add_thread_sub",add_thread_sub)
     
     if (!params.groupId) return;
 
     const res = useQuery(GET_GROUP_DETAIL, {
         variables: { id: params.groupId }
     });
-    console.log(res, 'singleGroupData')
 
     if(add_thread_sub && add_thread_sub.data && add_thread_sub.data.threadCreated){
         if(add_thread_sub.data.threadCreated == params.groupId){
@@ -61,20 +58,6 @@ const Thread = () => {
 
 
             })}
-            {/* <div className={styles.sendMsgBox}>
-                <section className={styles.sendMsg}>We’re at the Drunken Clam!</section>
-            </div>
-            <div className={styles.receiveMsgBox}>
-                <Avatar src="https://i.postimg.cc/440sCPPH/Avatar1.png" width={24} height={24} />
-                <div className={styles.receiveMsg}>Shoot I’m sorry. I kind of cryogenically froze myself for 1000 years 😅</div>
-            </div>
-            <div className={styles.sendMsgBox}>
-                <section className={styles.sendMsg}>You’re crazy man! I’ve wanted to do that for so long but Lois keeps saying no 🤬</section>
-            </div>
-            <div className={styles.receiveMsgBox}>
-                <Avatar src="https://i.postimg.cc/440sCPPH/Avatar1.png" width={24} height={24} />
-                <div className={styles.receiveMsg}>OH GOD WHAT IS THIS PLACE. Aliens, robots oh no Peter I need your help!</div>
-            </div> */}
         </div>
     )
 }
@@ -123,7 +106,7 @@ function MessageThread() {
 
     return (
         <div className={styles.threadBox}>
-            <Header />
+            {/* <Header /> */}
             <Thread />
             <InputBox />
         </div>
